@@ -37,7 +37,7 @@ public class Graph {
         Queue<Integer> frontier = new LinkedList<>();
         frontier.add(from);
 
-        System.out.println("Vertex sequence for DFS: ");
+        System.out.println("Vertex sequence for BFS: ");
         while (!frontier.isEmpty()) {
             Queue<Integer> next = new LinkedList<>();
 
