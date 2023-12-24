@@ -3,6 +3,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         final int dim = 7;
+        final int dim1 = 5;
         final Graph graph = new Graph(dim * dim);
 
 
@@ -27,22 +28,22 @@ public class Main {
                 {1, 0, 0, 0, 0, 1, 1, 1}
         };
 
-        /* final int[][] H = {
+         final int[][] H1 = {
                 {1, 1, 1, 1, 1},
                 {0, 1, 1, 0, 0},
                 {1, 1, 1, 1, 0},
                 {0, 1, 0, 0, 1},
                 {1, 0, 0, 0, 0},
                 {1, 1, 1, 1, 1}
-        };*/
+        };
         
-        /*final int[][] V = {
+        final int[][] V1 = {
                 {1, 1, 0, 0, 0, 1},
                 {1, 0, 0, 0, 1, 1},
                 {1, 0, 0, 1, 0, 1},
                 {1, 0, 1, 1, 1, 1},
                 {1, 0, 1, 0, 0, 1}
-        };*/
+        };
 
 //        for no solution test
 
@@ -63,8 +64,21 @@ public class Main {
                     graph.addEdge(f, t);
                     graph.addEdge(t, f);
                 }
+
             }
         }
+
+        for (int y = 0; y < dim1; ++y) {
+            for (int x = 0; x < dim1 - 1; ++x) {
+                int f = y * dim1 + x;
+                int t = f + 1;
+                if (V1[f / dim1][t % dim1] == 0) {
+                    graph.addEdge(f, t);
+                    graph.addEdge(t, f);
+                }
+            }
+        }
+
 
         // fill vertical edges
         for (int x = 0; x < dim; ++x) {
@@ -72,6 +86,17 @@ public class Main {
                 int f = y * dim + x;
                 int t = f + dim;
                 if (H[t / dim][f % dim] == 0) {
+                    graph.addEdge(f, t);
+                    graph.addEdge(t, f);
+                }
+
+            }
+        }
+        for (int x = 0; x < dim1; ++x) {
+            for (int y = 0; y < dim1 - 1; ++y) {
+                int f = y * dim1 + x;
+                int t = f + dim1;
+                if (H1[t / dim1][f % dim1] == 0) {
                     graph.addEdge(f, t);
                     graph.addEdge(t, f);
                 }
@@ -98,6 +123,33 @@ public class Main {
             int row = path2.get(i) % 5;
             System.out.print("(" + row + ", " + col + ")");
             if (i == path2.size() - 1) {
+                System.out.println();
+            } else {
+                System.out.print(" -> ");
+            }
+        }
+
+        System.out.print("\n\nTest2\n");
+        List<Integer> path3 = graph.breadthFirstSearch(0, dim1 * dim1 - 1);
+        System.out.println("\nPath for BFS:");
+        for (int i = 0; i < path3.size(); ++i) {
+            int col = path3.get(i) / 5;
+            int row = path3.get(i) % 5;
+            System.out.print("(" + row + ", " + col + ")");
+            if (i == path3.size() - 1) {
+                System.out.println();
+            } else {
+                System.out.print(" -> ");
+            }
+        }
+
+        List<Integer> path4 = graph.depthFirstSearch(0, dim1 * dim1 - 1);
+        System.out.println("\nPath for DFS:");
+        for (int i = 0; i < path4.size(); ++i) {
+            int col = path4.get(i) / 5;
+            int row = path4.get(i) % 5;
+            System.out.print("(" + row + ", " + col + ")");
+            if (i == path4.size() - 1) {
                 System.out.println();
             } else {
                 System.out.print(" -> ");
