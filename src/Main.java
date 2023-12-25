@@ -13,14 +13,15 @@ public class Main {
         int caseNum = 0;
         for (TestCase testCase : TestCase.getTestCases()) {
             System.out.println("--- Test Case #" + caseNum++ + " ---");
-            Maze maze = new Maze(testCase.getHorizontalWalls(), testCase.getVerticalWalls(), testCase.getDimension());
+            Maze maze = new Maze(testCase.getHorizontalWalls(), testCase.getVerticalWalls());
+            int width = testCase.getWidth();
 
             List<Integer> bfsPath = maze.runBFS();
             System.out.println("\nPath for BFS:");
             if (bfsPath.isEmpty()) {
                 System.out.println("*** No solution ***");
             } else {
-                printPath(bfsPath, testCase.getDimension());
+                printPath(bfsPath, width);
                 System.out.println();
             }
 
@@ -29,17 +30,17 @@ public class Main {
             if (dfsPath.isEmpty()) {
                 System.out.println("*** No solution ***");
             } else {
-                printPath(dfsPath, testCase.getDimension());
+                printPath(dfsPath, width);
                 System.out.println();
             }
         }
     }
 
-    private static void printPath(List<Integer> path, int dimension) {
+    private static void printPath(List<Integer> path, int width) {
         for (int i = 0; i < path.size(); ++i) {
-            int col = path.get(i) / dimension;
-            int row = path.get(i) % dimension;
-            System.out.print("(" + col + ", " + row + ")");
+            int col = path.get(i) % width;
+            int row = path.get(i) / width;
+            System.out.print("(" + row + ", " + col + ")");
             if (i == path.size() - 1) {
                 System.out.println();
             } else {

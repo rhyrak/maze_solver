@@ -1,5 +1,5 @@
 /*
-19050111022, FURKAN DEMİR
+11050111022, FURKAN DEMİR
 20050111011, İBRAHİM BAHÇA
 20050111034, MERTER ÇOBAN
 20050111008, SELÇUK GENÇAY
@@ -11,21 +11,20 @@ import java.util.ArrayList;
 public class TestCase {
     private final int[][] verticalWalls;
     private final int[][] horizontalWalls;
-    private final int dimension;
     static private ArrayList<TestCase> cases = null;
 
-    public TestCase(int[][] verticalWalls, int[][] horizontalWalls, int dimension) {
+    public TestCase(int[][] verticalWalls, int[][] horizontalWalls) {
         this.verticalWalls = verticalWalls;
         this.horizontalWalls = horizontalWalls;
-        this.dimension = dimension;
     }
 
     static ArrayList<TestCase> getTestCases() {
         if (cases == null) {
             cases = new ArrayList<>(2);
-            cases.add(new TestCase(V0, H0, 7));
-            cases.add(new TestCase(V1, H1, 5));
-            cases.add(new TestCase(V2, H2, 5));
+            cases.add(new TestCase(V0, H0));
+            cases.add(new TestCase(V1, H1));
+            cases.add(new TestCase(V2, H2));
+            cases.add(new TestCase(V3, H3));
         }
 
         return cases;
@@ -39,8 +38,12 @@ public class TestCase {
         return horizontalWalls;
     }
 
-    public int getDimension() {
-        return dimension;
+    public int getWidth() {
+        return this.horizontalWalls[0].length;
+    }
+
+    public int getHeight() {
+        return this.verticalWalls.length;
     }
 
     private static final int[][] H0 = {
@@ -97,5 +100,22 @@ public class TestCase {
             {1, 0, 0, 1, 0, 1},
             {1, 0, 1, 1, 1, 1},
             {1, 0, 1, 0, 1, 1}
+    };
+
+    private static final int[][] H3 = {
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 0, 0, 0, 0, 0, 1, 1, 0},
+            {0, 0, 0, 0, 1, 0, 1, 1, 0, 0},
+            {1, 0, 1, 1, 0, 1, 1, 0, 1, 0},
+            {0, 1, 0, 0, 1, 1, 1, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    };
+
+    private static final int[][] V3 = {
+            {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1},
+            {1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1},
+            {1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1},
+            {1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1}
     };
 }
