@@ -96,9 +96,17 @@ public class Graph {
         Arrays.fill(parent, -1);
 
         List<Integer> path = new ArrayList<>();
-
+        List<Integer>[] adj = new List[vertexCount];
         System.out.println("Vertex sequence for DFS:");
-        dfsHelper(from, to, visited, parent, path);
+        for(int i = 0; i < vertexCount; i++) {
+            adj[i] = new ArrayList<>();
+            for (int j = 0; j < vertexCount; j++) {
+                if (hasEdge(i, j)) {
+                    adj[i].add(j);
+                }
+            }
+        }
+        dfsHelper(from, to,visited, parent, path, adj);
 
         return path;
     }
@@ -109,20 +117,22 @@ public class Graph {
      * @param path keeps path at the end of the function we return path
      * {@code DFShelper} makes DFS process
      * */
-    private void dfsHelper(int current, int to, boolean[] visited, int[] parent, List<Integer> path) {
+    private void dfsHelper(int current, int to, boolean[] visited, int[] parent, List<Integer> path, List<Integer>[] adj) {
         visited[current] = true;
         System.out.print(current + " ");
 
         // take the vertex has the smallest number first
-        for (int i = 0; i < vertexCount; ++i) {
-            if (hasEdge(current, i) && !visited[i]) {
+        for (int i : adj[current]) {
+            if(!visited[i]) {
                 parent[i] = current;
                 if (i == to) {
                     constructPath(i, parent, path);
+                    System.out.print(i + " ");
                     return;
                 }
-                dfsHelper(i, to, visited, parent, path);
+                dfsHelper(i, to, visited, parent, path, adj);
             }
+
         }
     }
 
