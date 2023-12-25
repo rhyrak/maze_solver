@@ -71,16 +71,8 @@ public class Graph {
                             next.add(i);
                         }
                         if (i == to) {
-                            Stack<Integer> tempPath = new Stack<>();
-                            tempPath.push(i);
-                            int iter = parent[i];
-                            while (iter != -1) {
-                                tempPath.push(iter);
-                                iter = parent[iter];
-                            }
-                            while (!tempPath.isEmpty()) {
-                                path.add(tempPath.pop());
-                            }
+                            constructPath(i, parent, path);
+                            System.out.print(i);
                             return path;
                         }
                     }
