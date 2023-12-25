@@ -1,8 +1,16 @@
+/*
+19050111022, FURKAN DEMİR
+20050111011, İBRAHİM BAHÇA
+20050111034, MERTER ÇOBAN
+20050111008, SELÇUK GENÇAY
+21050141038, YOUSIF HARITH SUHAIL SUHAIL
+*/
+
 import java.util.*;
 
 public class Graph {
-    private int vertexCount;
-    private boolean[][] edges;
+    private final int vertexCount;
+    private final boolean[][] edges;
 
     public Graph(int vertexCount) {
         this.vertexCount = vertexCount;
@@ -40,10 +48,6 @@ public class Graph {
         System.out.println("Vertex sequence for BFS: ");
         while (!frontier.isEmpty()) {
             Queue<Integer> next = new LinkedList<>();
-
-            if (false) {
-                System.out.println("Frontier #" + l + ": " + frontier);
-            }
 
             while (!frontier.isEmpty()) {
                 int u = frontier.poll();
@@ -84,7 +88,7 @@ public class Graph {
 
         List<Integer> path = new ArrayList<>();
 
-        System.out.println("\nVertex sequence for DFS:");
+        System.out.println("Vertex sequence for DFS:");
         dfsHelper(from, to, visited, parent, path);
 
         return path;
